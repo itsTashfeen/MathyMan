@@ -13,11 +13,21 @@ def connect_to_db():
     conn = sqlite3.connect(DATABASE_FILE)
     return conn
 
-def fetch_problems(difficulty: str, num_questions: int) -> list:
-    """Fetches a specified number of problems of a given difficulty from the database."""
+def get_topics_from_db():
+    """Fetches the unique topics from the database."""
     conn = connect_to_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM problems WHERE difficulty = ? ORDER BY RANDOM() LIMIT ?", (difficulty, num_questions))
+    cursor.execute("SELECT DISTINCT topic FROM problems")
+    topics = [row[0] for row in cursor.fetchall()]
+    conn.close()
+    return topics
+
+
+def fetch_problems(topic: str, difficulty: str, num_questions: int) -> list:
+    """Fetches a specified number of problems of a given difficulty and topic from the database."""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM problems WHERE topic = ? AND difficulty = ? ORDER BY RANDOM() LIMIT ?", (topic, difficulty, num_questions))
     problems = cursor.fetchall()
     conn.close()
     return problems
@@ -271,16 +281,16 @@ def substitute_variables(problem_latex: str, variable_type: str = None) -> Tuple
     return problem_latex, ""
 
 
-def generate_problem_set(difficulty: str, num_questions: int) -> list:
+def generate_problem_set(topic: str, difficulty: str, num_questions: int) -> list:
     """Generates a list of problems with substituted variables."""
     problem_set = []
-    problems = fetch_problems(difficulty, num_questions)
+    problems = fetch_problems(topic, difficulty, num_questions)
 
     for problem in problems:
         # problem[1] is the problem, problem[6] is the variable_type
-        if problem[6]: # if there is a variable type
+        if problem[6]:  # if there is a variable type
             substituted_problem, substitutions = substitute_variables(problem[2], problem[6])
-            substituted_solution, _ = substitute_variables(problem[3], problem[6]) # Substitute also in solution
+            substituted_solution, _ = substitute_variables(problem[3], problem[6])  # Substitute also in solution
         else:
             substituted_problem = problem[2]
             substituted_solution = problem[3]
@@ -300,12 +310,14 @@ def main():
 
     # Sidebar controls
     st.sidebar.header("Problem Settings")
+    topics = get_topics_from_db()
+    topic = st.sidebar.selectbox("Problem Type", topics) # Use topics from DB
     difficulty = st.sidebar.selectbox("Difficulty", ["easy", "medium", "hard", "ultimate"])
     num_questions = st.sidebar.slider("Number of Questions", 1, 10, 3)
 
     # Generate problems when button is clicked
     if st.sidebar.button("Generate Problems"):
-        problem_set = generate_problem_set(difficulty, num_questions)
+        problem_set = generate_problem_set(topic, difficulty, num_questions)
 
         # Display problems
         for i, problem in enumerate(problem_set):
