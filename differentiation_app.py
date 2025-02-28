@@ -306,6 +306,8 @@ def main():
     init_user_db()
 
     # Custom CSS (including the auth-container from before, and the theme application)
+    # Check if 'preferences' exists in session state and handle the case where it doesn't
+    theme = st.session_state.get('preferences', {}).get('theme', 'light')
     st.markdown(
         f"""
         <style>
@@ -324,7 +326,7 @@ def main():
             background-color: #f8f9fa;
         }}
         /*  Apply the theme dynamically, note the usage of the apply_theme method */
-        {apply_theme(st.session_state.get('preferences', {}).get('theme', 'light'))}
+        {apply_theme(theme)}
 
         </style>
         """,
@@ -488,7 +490,7 @@ def main():
             # Default difficulty preference
             difficulty_options = ["easy", "medium", "hard", "ultimate"]
             default_difficulty = current_prefs.get("default_difficulty", "easy")
-            difficulty_index = difficulty_options.index(default_difficulty) if difficulty_difficulty in difficulty_options else 0
+            difficulty_index = difficulty_options.index(default_difficulty) if default_difficulty in difficulty_options else 0
             new_default_difficulty = st.selectbox("Default Difficulty", difficulty_options, index=difficulty_index)
 
             # Default number of questions
