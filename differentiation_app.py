@@ -39,13 +39,13 @@ def create_user(username, password):
     """Create a new user in the database"""
     conn = sqlite3.connect(USER_DB_FILE)
     cursor = conn.cursor()
-    
+
     # Check if username already exists
     cursor.execute("SELECT username FROM users WHERE username = ?", (username,))
     if cursor.fetchone():
         conn.close()
         return False, "Username already exists"
-    
+
     # Hash password and store user
     password_hash, salt = hash_password(password)
     default_preferences = json.dumps({
@@ -55,7 +55,7 @@ def create_user(username, password):
         "dark_mode": False,
         "theme": "light"  # New theme preference
     })
-    
+
     cursor.execute(
         "INSERT INTO users (username, password_hash, salt, preferences) VALUES (?, ?, ?, ?)",
         (username, password_hash, salt, default_preferences)
@@ -71,7 +71,7 @@ def verify_user(username, password):
     cursor.execute("SELECT password_hash, salt FROM users WHERE username = ?", (username,))
     result = cursor.fetchone()
     conn.close()
-    
+
     if result:
         stored_hash, salt = result
         calculated_hash, _ = hash_password(password, salt)
@@ -86,7 +86,7 @@ def get_user_preferences(username):
     cursor.execute("SELECT preferences FROM users WHERE username = ?", (username,))
     result = cursor.fetchone()
     conn.close()
-    
+
     if result and result[0]:
         return json.loads(result[0])
     return None
@@ -435,6 +435,7 @@ def main():
 
         # Tab 1: Problem Generation
         with tabs[0]:
+            st.subheader("Generate Problems")  # Add subheader
             col1, col2, col3 = st.columns(3)
 
             topics = get_topics_from_db()
@@ -487,7 +488,7 @@ def main():
             # Default difficulty preference
             difficulty_options = ["easy", "medium", "hard", "ultimate"]
             default_difficulty = current_prefs.get("default_difficulty", "easy")
-            difficulty_index = difficulty_options.index(default_difficulty) if default_difficulty in difficulty_options else 0
+            difficulty_index = difficulty_options.index(default_difficulty) if difficulty_difficulty in difficulty_options else 0
             new_default_difficulty = st.selectbox("Default Difficulty", difficulty_options, index=difficulty_index)
 
             # Default number of questions
@@ -515,6 +516,3 @@ def main():
                 st.success("Preferences saved successfully!")
                 #  Force a rerun to update the theme immediately.
                 st.rerun() # or st.experimental_rerun()
-
-if __name__ == "__main__":
-    main()
