@@ -28,12 +28,12 @@ def generate_variation(problem, seed=None):
 
         #replace only x with simple intergers for now
         new_x = random.randint(2, 10) # Generate random value
-        new_problem_str = problem_str.replace("x", f"({new_x})")
-        new_solution_str = solution_str.replace("x", f"({new_x})")
+        new_problem_str = problem_str.replace("x", f"{new_x}")
+        new_solution_str = solution_str.replace("x", f"{new_x}")
 
         #latex
-        new_problem_latex_str = problem_latex_str.replace("x", f"({new_x})")
-        new_solution_latex_str = solution_latex_str.replace("x", f"({new_x})")
+        new_problem_latex_str = problem_latex_str.replace("x", f"{new_x}")
+        new_solution_latex_str = solution_latex_str.replace("x", f"{new_x}")
 
         return {
             "problem": new_problem_str,
