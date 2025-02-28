@@ -315,9 +315,13 @@ def main():
                 st.write(f"Variable Substitutions: {problem['substitutions']}")
             st.write("---")  # Separator
 
-            # Solution toggle
-            if st.checkbox(f"Show Solution for Question {i+1}"):
+            # Solution dropdown
+            solution_options = ["Show Solution", "Hide Solution"]
+            selected_option = st.selectbox(f"Show Solution for Question {i+1}", solution_options, index=0)
+
+            if selected_option == "Show Solution":
                 st.latex(problem["solution_latex"])
+
 
 if __name__ == "__main__":
     main()
