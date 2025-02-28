@@ -1,75 +1,323 @@
-import json
-import random
 import streamlit as st
+import sqlite3
+import random
+import re
+import math
+from typing import Tuple, Union
 
-# Load the problem data from the JSON file.  Assume the file is in the same directory.
-try:
-    with open('differentiation_problems.json', 'r') as f:
-        differentiation_problems = json.load(f)
-except FileNotFoundError:
-    st.error("Error: differentiation_problems.json not found. Make sure it's in the same directory as the script.")
-    st.stop()
+# Database setup (assuming the database is in the same directory as the script)
+DATABASE_FILE = 'math_problems.db'
 
-# Function to generate a variation of a problem
-def generate_variation(problem, seed=None):
-    """Generates a variation of a differentiation problem by replacing variables.
-       This is a simplified example and can be expanded to handle more cases.
-    """
-    if seed is not None:
-        random.seed(seed)  # for reproducibility
-    problem_str = problem["problem"]
-    solution_str = problem["solution"]
-    problem_latex_str = problem["problem_latex"]
-    solution_latex_str = problem["solution_latex"]
+def connect_to_db():
+    """Connects to the SQLite database."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    return conn
+
+def fetch_problems(difficulty: str, num_questions: int) -> list:
+    """Fetches a specified number of problems of a given difficulty from the database."""
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM problems WHERE difficulty = ? ORDER BY RANDOM() LIMIT ?", (difficulty, num_questions))
+    problems = cursor.fetchall()
+    conn.close()
+    return problems
 
 
-    # Simple variable replacement (x with a random integer or expression)
-    if "x" in problem_str:
-
-        #replace only x with simple intergers for now
-        new_x = random.randint(2, 10) # Generate random value
-        new_problem_str = problem_str.replace("x", f"{new_x}")
-        new_solution_str = solution_str.replace("x", f"{new_x}")
-
-        #latex
-        new_problem_latex_str = problem_latex_str.replace("x", f"{new_x}")
-        new_solution_latex_str = solution_latex_str.replace("x", f"{new_x}")
-
-        return {
-            "problem": new_problem_str,
-            "problem_latex": new_problem_latex_str,
-            "solution": new_solution_str,
-            "solution_latex": new_solution_latex_str
-        }
-
-    return problem  # Return original if no suitable variable for replacement
-
-# Streamlit app
-st.title("Differentiation Problem Generator")
-
-# User input for difficulty and number of problems
-difficulty = st.selectbox("Select Difficulty:", ["ultimate"], index=0) # limiting to ultimate for now
-num_problems = st.number_input("Enter Number of Problems to Generate:", min_value=1, max_value=20, value=1)
-
-# Generate and display problems
-if st.button("Generate Problems"):
-    if difficulty in differentiation_problems:
-        problems = differentiation_problems[difficulty]
-        if problems: # Check if there are problems for the chosen difficulty
-
-            for i in range(num_problems):
-                # Select a random problem from the chosen difficulty
-                selected_problem = random.choice(problems)
-
-                # Generate a variation
-                varied_problem = generate_variation(selected_problem, seed=i) # using seed for reproducibility
-
-                st.subheader(f"Problem {i+1}:")
-                st.latex(varied_problem["problem_latex"]) # Display using LaTeX
-
-                st.subheader("Solution:")
-                st.latex(varied_problem["solution_latex"])  # Display using LaTeX
-        else:
-            st.warning(f"No problems found for difficulty: {difficulty}")
+def generate_random_value(variable_type: str = None) -> Union[int, float]:
+    """Generates a random value based on variable type."""
+    if variable_type in ("power_rule", "e_rule", "ln_coeff", "power_rule_coeff", "general_coeff_sqrt", "chain_rule_trig_ln", "arccos_sqrt_coeff", "arctan_e_coeff", "ln_coeff_plus_x2", "product_rule_coeff_trig", "ln_sqrt_coeff", "power_rule_trig", "power_rule_chain_exp", "quotient_rule_sqrt_coeff", "power_rule_chain_arctan", "product_rule_ln_coeff", "power_rule_product", "quotient_rule_ln_coeff","quotient_rule_power_denom", "ln_ln_ax", "sin_x_ln_ax","power_e_x","e_ax_sin_x","ln_sin_x_a_cos_x", "ln_x_a_x2", "power_rule_x_xa", "arctan_ln_ax","ln_exp_coeff", "sqrt_ln_x2_coeff", "e_sin_ax2", "ln_arctan_ax2", "product_rule_x_sin_ax", "e_x_cos_ax", "quotient_rule_sin_ax2", "arctan_exp_ax", "ln_ax_sqrt", "ln_x2_ax", "arctan_ln_ax_x", "power_rule_ln_cos", "product_rule_e_sin_ln_ax", "arctan_e_ax_ln_x", "ln_sin_ax3", "ln_sqrt_tan_ax", "e_x_x_ln_ax", "ln_ln_sin_ax", "arcsin_e_ax2", "power_rule_exp_a_ln_x", "ln_x_ax", "quotient_rule_tan_ax2", "sqrt_arctan_ax2", "ln_arctan_ax3", "e_sin_ax2_a", "arctan_e_a_sin_x", "ln_x_xa"):
+        return random.randint(1, 5)  # Coefficients and powers
+    elif variable_type == "x_sin_ax":
+        return random.uniform(0.1, 0.9) # Between 0.1 and 0.9 for better results
+    elif variable_type == 'none':
+        return None # No variables to substitute
+    elif variable_type == "arctan_a_x":
+        return random.randint(1, 3)
+    elif variable_type == 'arcsin':
+        return random.uniform(0.1, 0.9)
     else:
-        st.error("Invalid difficulty level selected.")
+        return random.randint(1, 5) # Default integer
+
+
+def substitute_variables(problem_latex: str, variable_type: str = None) -> Tuple[str, str]:
+    """Substitutes variables in a problem using the variable_type to determine substitution."""
+    if variable_type is None:
+        return problem_latex, ""
+
+    # Define substitution rules for different variable types
+    if variable_type == "power_rule":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "e_rule":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_coeff":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_coeff":
+        a = generate_random_value(variable_type)
+        b = generate_random_value(variable_type)
+        c = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a)).replace("b", str(b)).replace("c", str(c))
+        return problem_latex, f"a = {a}, b = {b}, c = {c}"
+    elif variable_type == "general_coeff_sqrt":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "chain_rule_trig_ln":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arccos_sqrt_coeff":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arctan_e_coeff":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_coeff_plus_x2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "product_rule_coeff_trig":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_sqrt_coeff":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_trig":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_chain_exp":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "quotient_rule_sqrt_coeff":
+         a = generate_random_value(variable_type)
+         problem_latex = problem_latex.replace("a", str(a))
+         return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_chain_arctan":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "product_rule_ln_coeff":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_product":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "quotient_rule_ln_coeff":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arctan_a_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "quotient_rule_power_denom":
+         a = generate_random_value(variable_type)
+         problem_latex = problem_latex.replace("a", str(a))
+         return problem_latex, f"a = {a}"
+    elif variable_type == "ln_ln_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "sin_x_ln_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_e_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "e_ax_sin_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_sin_x_a_cos_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_x_a_x2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_x_xa":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arctan_ln_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_exp_coeff":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "sqrt_ln_x2_coeff":
+         a = generate_random_value(variable_type)
+         problem_latex = problem_latex.replace("a", str(a))
+         return problem_latex, f"a = {a}"
+    elif variable_type == "e_sin_ax2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_arctan_ax2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "product_rule_x_sin_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "e_x_cos_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "quotient_rule_sin_ax2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arctan_exp_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_ax_sqrt":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_x2_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arctan_ln_ax_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_ln_cos":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "product_rule_e_sin_ln_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arctan_e_ax_ln_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_sin_ax3":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_sqrt_tan_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "e_x_x_ln_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_ln_sin_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arcsin_e_ax2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "power_rule_exp_a_ln_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_x_ax":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "quotient_rule_tan_ax2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "sqrt_arctan_ax2":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_arctan_ax3":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "e_sin_ax2_a":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "arctan_e_a_sin_x":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+    elif variable_type == "ln_x_xa":
+        a = generate_random_value(variable_type)
+        problem_latex = problem_latex.replace("a", str(a))
+        return problem_latex, f"a = {a}"
+
+    return problem_latex, ""
+
+
+def generate_problem_set(difficulty: str, num_questions: int) -> list:
+    """Generates a list of problems with substituted variables."""
+    problem_set = []
+    problems = fetch_problems(difficulty, num_questions)
+
+    for problem in problems:
+        # problem[1] is the problem, problem[6] is the variable_type
+        if problem[6]: # if there is a variable type
+            substituted_problem, substitutions = substitute_variables(problem[2], problem[6])
+            substituted_solution, _ = substitute_variables(problem[3], problem[6]) # Substitute also in solution
+        else:
+            substituted_problem = problem[2]
+            substituted_solution = problem[3]
+            substitutions = ""
+
+        problem_set.append({
+            "problem_latex": substituted_problem,
+            "solution_latex": substituted_solution,
+            "substitutions": substitutions
+        })
+
+    return problem_set
+
+
+def main():
+    st.title("Differentiation Practice")
+
+    # Sidebar controls
+    st.sidebar.header("Problem Settings")
+    difficulty = st.sidebar.selectbox("Difficulty", ["easy", "medium", "hard", "ultimate"])
+    num_questions = st.sidebar.slider("Number of Questions", 1, 10, 3)
+
+    # Generate problems when button is clicked
+    if st.sidebar.button("Generate Problems"):
+        problem_set = generate_problem_set(difficulty, num_questions)
+
+        # Display problems
+        for i, problem in enumerate(problem_set):
+            st.subheader(f"Question {i+1}")
+            st.latex(problem["problem_latex"])
+            if problem["substitutions"]:
+                st.write(f"Variable Substitutions: {problem['substitutions']}")
+            st.write("---")  # Separator
+
+            # Solution toggle
+            if st.checkbox(f"Show Solution for Question {i+1}"):
+                st.latex(problem["solution_latex"])
+
+if __name__ == "__main__":
+    main()
