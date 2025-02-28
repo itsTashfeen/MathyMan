@@ -282,75 +282,83 @@
         },
         {
             "id": 31,
-            "problem": "f(x) = sin(x)/x",
-            "problem_latex": "f(x) = \\frac{\\sin(x)}{x}",
-            "solution": "f'(x) = (xcos(x) - sin(x))/x^2",
-            "solution_latex": "f'(x) = \\frac{x\\cos(x) - \\sin(x)}{x^2}",
+            "problem": "f(x) = sin(x)/x^a",
+            "problem_latex": "f(x) = \\frac{\\sin(x)}{x^a}",
+            "solution": "f'(x) = (x*cos(x) - a*sin(x))/x^(a+1)",
+            "solution_latex": "f'(x) = \\frac{x\\cos(x) - a\\sin(x)}{x^{a+1}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "quotient_rule_power_denom"
         },
         {
             "id": 32,
-            "problem": "f(x) = sqrt(x^2 + 1)",
-            "problem_latex": "f(x) = \\sqrt{x^2 + 1}",
-            "solution": "f'(x) = x/sqrt(x^2 + 1)",
-            "solution_latex": "f'(x) = \\frac{x}{\\sqrt{x^2 + 1}}",
+            "problem": "f(x) = sqrt(x^2 + a)",
+            "problem_latex": "f(x) = \\sqrt{x^2 + a}",
+            "solution": "f'(x) = x/sqrt(x^2 + a)",
+            "solution_latex": "f'(x) = \\frac{x}{\\sqrt{x^2 + a}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "general_coeff_sqrt"
         },
         {
             "id": 33,
-            "problem": "f(x) = ln(sin(x))",
-            "problem_latex": "f(x) = \\ln(\\sin(x))",
-            "solution": "f'(x) = cot(x)",
-            "solution_latex": "f'(x) = \\cot(x)",
+            "problem": "f(x) = ln(sin(ax))",
+            "problem_latex": "f(x) = \\ln(\\sin(ax))",
+            "solution": "f'(x) = a*cot(ax)",
+            "solution_latex": "f'(x) = a\\cot(ax)",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "chain_rule_trig_ln"
         },
         {
             "id": 34,
-            "problem": "f(x) = arcsin(x^2)",
-            "problem_latex": "f(x) = \\arcsin(x^2)",
-            "solution": "f'(x) = 2x/sqrt(1 - x^4)",
-            "solution_latex": "f'(x) = \\frac{2x}{\\sqrt{1 - x^4}}",
+            "problem": "f(x) = arcsin(x^a)",
+            "problem_latex": "f(x) = \\arcsin(x^a)",
+            "solution": "f'(x) = a*x^(a-1)/sqrt(1 - x^(2a))",
+            "solution_latex": "f'(x) = \\frac{a x^{a-1}}{\\sqrt{1 - x^{2a}}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule_chain_arcsin"
         },
         {
             "id": 35,
-            "problem": "f(x) = arccos(sqrt(x))",
-            "problem_latex": "f(x) = \\arccos(\\sqrt{x})",
-            "solution": "f'(x) = -1/(2sqrt(x)sqrt(1 - x))",
-            "solution_latex": "f'(x) = -\\frac{1}{2\\sqrt{x}\\sqrt{1 - x}}",
+            "problem": "f(x) = arccos(sqrt(ax))",
+            "problem_latex": "f(x) = \\arccos(\\sqrt{ax})",
+            "solution": "f'(x) = -a/(2sqrt(ax)sqrt(1 - ax))",
+            "solution_latex": "f'(x) = -\\frac{a}{2\\sqrt{ax}\\sqrt{1 - ax}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "arccos_sqrt_coeff"
         },
         {
             "id": 36,
-            "problem": "f(x) = arctan(e^x)",
-            "problem_latex": "f(x) = \\arctan(e^x)",
-            "solution": "f'(x) = e^x/(1 + e^{2x})",
-            "solution_latex": "f'(x) = \\frac{e^x}{1 + e^{2x}}",
+            "problem": "f(x) = arctan(e^{ax})",
+            "problem_latex": "f(x) = \\arctan(e^{ax})",
+            "solution": "f'(x) = a*e^{ax}/(1 + e^{2ax})",
+            "solution_latex": "f'(x) = \\frac{a e^{ax}}{1 + e^{2ax}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "arctan_e_coeff"
         },
         {
             "id": 37,
-            "problem": "f(x) = ln(1 + x^2)",
-            "problem_latex": "f(x) = \\ln(1 + x^2)",
-            "solution": "f'(x) = 2x/(1 + x^2)",
-            "solution_latex": "f'(x) = \\frac{2x}{1 + x^2}",
+            "problem": "f(x) = ln(a + x^2)",
+            "problem_latex": "f(x) = \\ln(a + x^2)",
+            "solution": "f'(x) = 2x/(a + x^2)",
+            "solution_latex": "f'(x) = \\frac{2x}{a + x^2}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "ln_coeff_plus_x2"
         },
         {
             "id": 38,
-            "problem": "f(x) = e^x sin(2x)",
-            "problem_latex": "f(x) = e^x \\sin(2x)",
-            "solution": "f'(x) = e^x(2cos(2x) + sin(2x))",
-            "solution_latex": "f'(x) = e^x(2\\cos(2x) + \\sin(2x))",
+            "problem": "f(x) = e^x sin(ax)",
+            "problem_latex": "f(x) = e^x \\sin(ax)",
+            "solution": "f'(x) = e^x(acos(ax) + sin(ax))",
+            "solution_latex": "f'(x) = e^x(a\\cos(ax) + \\sin(ax))",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "product_rule_coeff_trig"
         },
         {
             "id": 39,
@@ -363,194 +371,215 @@
         },
         {
             "id": 40,
-            "problem": "f(x) = ln(x + sqrt(x^2 + 1))",
-            "problem_latex": "f(x) = \\ln(x + \\sqrt{x^2 + 1})",
-            "solution": "f'(x) = 1/sqrt(x^2 + 1)",
-            "solution_latex": "f'(x) = \\frac{1}{\\sqrt{x^2 + 1}}",
+            "problem": "f(x) = ln(x + sqrt(x^2 + a))",
+            "problem_latex": "f(x) = \\ln(x + \\sqrt{x^2 + a})",
+            "solution": "f'(x) = 1/sqrt(x^2 + a)",
+            "solution_latex": "f'(x) = \\frac{1}{\\sqrt{x^2 + a}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "ln_sqrt_coeff"
         },
         {
             "id": 41,
-            "problem": "f(x) = tan^2(x)",
-            "problem_latex": "f(x) = \\tan^2(x)",
-            "solution": "f'(x) = 2tan(x)sec^2(x)",
-            "solution_latex": "f'(x) = 2\\tan(x)\\sec^2(x)",
+            "problem": "f(x) = tan^a(x)",
+            "problem_latex": "f(x) = \\tan^a(x)",
+            "solution": "f'(x) = a*tan^(a-1)(x)sec^2(x)",
+            "solution_latex": "f'(x) = a\\tan^{a-1}(x)\\sec^2(x)",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule_trig"
         },
         {
             "id": 42,
-            "problem": "f(x) = e^{x^3}",
-            "problem_latex": "f(x) = e^{x^3}",
-            "solution": "f'(x) = 3x^2e^{x^3}",
-            "solution_latex": "f'(x) = 3x^2 e^{x^3}",
+            "problem": "f(x) = e^{ax^3}",
+            "problem_latex": "f(x) = e^{ax^3}",
+            "solution": "f'(x) = 3ax^2e^{ax^3}",
+            "solution_latex": "f'(x) = 3ax^2 e^{ax^3}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule_chain_exp"
         },
         {
             "id": 43,
-            "problem": "f(x) = cos^3(x)",
-            "problem_latex": "f(x) = \\cos^3(x)",
-            "solution": "f'(x) = -3cos^2(x)sin(x)",
-            "solution_latex": "f'(x) = -3\\cos^2(x)\\sin(x)",
+            "problem": "f(x) = cos^a(x)",
+            "problem_latex": "f(x) = \\cos^a(x)",
+            "solution": "f'(x) = -a*cos^(a-1)(x)sin(x)",
+            "solution_latex": "f'(x) = -a\\cos^{a-1}(x)\\sin(x)",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule_trig"
         },
         {
             "id": 44,
-            "problem": "f(x) = ln(x)/sqrt(x)",
-            "problem_latex": "f(x) = \\frac{\\ln(x)}{\\sqrt{x}}",
-            "solution": "f'(x) = (1 - 2ln(x))/(2x^(3/2))",
-            "solution_latex": "f'(x) = \\frac{1 - 2\\ln(x)}{2x^{3/2}}",
+            "problem": "f(x) = ln(x)/sqrt(ax)",
+            "problem_latex": "f(x) = \\frac{\\ln(x)}{\\sqrt{ax}}",
+            "solution": "f'(x) = (2ax - xln(x))/(2ax^(3/2))",
+            "solution_latex": "f'(x) = \\frac{2a - \\ln(x)}{2a x^{3/2}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "quotient_rule_sqrt_coeff"
         },
         {
             "id": 45,
-            "problem": "f(x) = sin(x)/x^2",
-            "problem_latex": "f(x) = \\frac{\\sin(x)}{x^2}",
-            "solution": "f'(x) = (xcos(x) - 2sin(x))/x^3",
-            "solution_latex": "f'(x) = \\frac{x\\cos(x) - 2\\sin(x)}{x^3}",
+            "problem": "f(x) = sin(x)/x^a",
+            "problem_latex": "f(x) = \\frac{\\sin(x)}{x^a}",
+            "solution": "f'(x) = (x^a*cos(x) - a*x^(a-1)sin(x))/x^(2a)",
+            "solution_latex": "f'(x) = \\frac{x\\cos(x) - a\\sin(x)}{x^{a+1}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "quotient_rule_power_denom"
         },
         {
             "id": 46,
-            "problem": "f(x) = arctan(x^2)",
-            "problem_latex": "f(x) = \\arctan(x^2)",
-            "solution": "f'(x) = 2x/(1 + x^4)",
-            "solution_latex": "f'(x) = \\frac{2x}{1 + x^4}",
+            "problem": "f(x) = arctan(x^a)",
+            "problem_latex": "f(x) = \\arctan(x^a)",
+            "solution": "f'(x) = a*x^(a-1)/(1 + x^(2a))",
+            "solution_latex": "f'(x) = \\frac{a x^{a-1}}{1 + x^{2a}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule_chain_arctan"
         },
         {
             "id": 47,
-            "problem": "f(x) = ln(x^2 + 1) sin(x)",
-            "problem_latex": "f(x) = \\ln(x^2 + 1) \\sin(x)",
-            "solution": "f'(x) = cos(x)ln(x^2 + 1) + 2xsin(x)/(x^2 + 1)",
-            "solution_latex": "f'(x) = \\cos(x)\\ln(x^2 + 1) + \\frac{2x\\sin(x)}{x^2 + 1}",
+            "problem": "f(x) = ln(x^2 + a) sin(x)",
+            "problem_latex": "f(x) = \\ln(x^2 + a) \\sin(x)",
+            "solution": "f'(x) = cos(x)ln(x^2 + a) + (2xsin(x))/(x^2 + a)",
+            "solution_latex": "f'(x) = \\cos(x)\\ln(x^2 + a) + \\frac{2x\\sin(x)}{x^2 + a}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "product_rule_ln_coeff"
         },
         {
             "id": 48,
-            "problem": "f(x) = x^3 ln(x)",
-            "problem_latex": "f(x) = x^3 \\ln(x)",
-            "solution": "f'(x) = 3x^2ln(x) + x^2",
-            "solution_latex": "f'(x) = 3x^2\\ln(x) + x^2",
+            "problem": "f(x) = x^a ln(x)",
+            "problem_latex": "f(x) = x^a \\ln(x)",
+            "solution": "f'(x) = a*x^(a-1)*ln(x) + x^(a-1)",
+            "solution_latex": "f'(x) = x^{a-1}(a\\ln(x) + 1)",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule_product"
         },
         {
             "id": 49,
-            "problem": "f(x) = tan(x)/x^2",
-            "problem_latex": "f(x) = \\frac{\\tan(x)}{x^2}",
-            "solution": "f'(x) = (x^2sec^2(x) - 2xtan(x))/x^4",
-            "solution_latex": "f'(x) = \\frac{x^2\\sec^2(x) - 2x\\tan(x)}{x^4}",
+            "problem": "f(x) = tan(x)/x^a",
+            "problem_latex": "f(x) = \\frac{\\tan(x)}{x^a}",
+            "solution": "f'(x) = (x^a*sec^2(x) - a*x^(a-1)tan(x))/x^(2a)",
+            "solution_latex": "f'(x) = \\frac{x^a\\sec^2(x) - a x^{a-1}\\tan(x)}{x^{2a}}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "quotient_rule_power_denom"
         },
         {
             "id": 50,
-            "problem": "f(x) = ln(2x)/x^2",
-            "problem_latex": "f(x) = \\frac{\\ln(2x)}{x^2}",
-            "solution": "f'(x) = (1 - 2ln(2x))/x^3",
-            "solution_latex": "f'(x) = \\frac{1 - 2\\ln(2x)}{x^3}",
+            "problem": "f(x) = ln(ax)/x^2",
+            "problem_latex": "f(x) = \\frac{\\ln(ax)}{x^2}",
+            "solution": "f'(x) = (1/x^2 - 2ln(ax)/x^3)",
+            "solution_latex": "f'(x) = \\frac{1-2\\ln(ax)}{x^3}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "quotient_rule_ln_coeff"
         }
     ],
     "hard": [
         {
             "id": 51,
-            "problem": "f(x) = x^{sin(x)}",
-            "problem_latex": "f(x) = x^{\\sin(x)}",
-            "solution": "f'(x) = x^{sin(x)}(cos(x)ln(x) + sin(x)/x)",
-            "solution_latex": "f'(x) = x^{\\sin(x)}\\left(\\cos(x)\\ln(x) + \\frac{\\sin(x)}{x}\\right)",
+            "problem": "f(x) = x^{sin(ax)}",
+            "problem_latex": "f(x) = x^{\\sin(ax)}",
+            "solution": "f'(x) = x^{sin(ax)}(acos(ax)ln(x) + sin(ax)/x)",
+            "solution_latex": "f'(x) = x^{\\sin(ax)}(a\\cos(ax)\\ln(x) + \\frac{\\sin(ax)}{x})",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "x_sin_ax"
         },
         {
             "id": 52,
-            "problem": "f(x) = ln(ln(x))",
-            "problem_latex": "f(x) = \\ln(\\ln(x))",
-            "solution": "f'(x) = 1/(xln(x))",
-            "solution_latex": "f'(x) = \\frac{1}{x\\ln(x)}",
+            "problem": "f(x) = ln(ln(ax))",
+            "problem_latex": "f(x) = \\ln(\\ln(ax))",
+            "solution": "f'(x) = 1/(xln(ax))",
+            "solution_latex": "f'(x) = \\frac{1}{x\\ln(ax)}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "ln_ln_ax"
         },
         {
             "id": 53,
-            "problem": "f(x) = e^{arctan(x)}",
-            "problem_latex": "f(x) = e^{\\arctan(x)}",
-            "solution": "f'(x) = e^{arctan(x)}/(1 + x^2)",
-            "solution_latex": "f'(x) = \\frac{e^{\\arctan(x)}}{1 + x^2}",
+            "problem": "f(x) = e^{arctan(ax)}",
+            "problem_latex": "f(x) = e^{\\arctan(ax)}",
+            "solution": "f'(x) = a*e^{arctan(ax)}/(1 + a^2 x^2)",
+            "solution_latex": "f'(x) = \\frac{a e^{\\arctan(ax)}}{1 + a^2 x^2}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "e_arctan_ax"
         },
         {
             "id": 54,
-            "problem": "f(x) = sin(x)/ln(x)",
-            "problem_latex": "f(x) = \\frac{\\sin(x)}{\\ln(x)}",
-            "solution": "f'(x) = (cos(x)ln(x) - sin(x)/x)/(ln(x))^2",
-            "solution_latex": "f'(x) = \\frac{\\cos(x)\\ln(x) - \\sin(x)/x}{(\\ln(x))^2}",
+            "problem": "f(x) = sin(x)/ln(ax)",
+            "problem_latex": "f(x) = \\frac{\\sin(x)}{\\ln(ax)}",
+            "solution": "f'(x) = (cos(x)ln(ax) - sin(x)/x)/(ln(ax))^2",
+            "solution_latex": "f'(x) = \\frac{\\cos(x)\\ln(ax) - \\frac{\\sin(x)}{x}}{(\\ln(ax))^2}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "sin_x_ln_ax"
         },
         {
             "id": 55,
-            "problem": "f(x) = ln(sqrt(x^2 + 1) + x)",
-            "problem_latex": "f(x) = \\ln\\left(\\sqrt{x^2 + 1} + x\\right)",
-            "solution": "f'(x) = 1/sqrt(x^2 + 1)",
-            "solution_latex": "f'(x) = \\frac{1}{\\sqrt{x^2 + 1}}",
+            "problem": "f(x) = ln(sqrt(x^2 + a) + x)",
+            "problem_latex": "f(x) = \\ln\\left(\\sqrt{x^2 + a} + x\\right)",
+            "solution": "f'(x) = 1/sqrt(x^2 + a)",
+            "solution_latex": "f'(x) = \\frac{1}{\\sqrt{x^2 + a}}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "ln_sqrt_coeff"
         },
         {
             "id": 56,
-            "problem": "f(x) = ln(x)/(x^2 + 1)",
-            "problem_latex": "f(x) = \\frac{\\ln(x)}{x^2 + 1}",
-            "solution": "f'(x) = (1 - 2xln(x))/(x^2 + 1)^2",
-            "solution_latex": "f'(x) = \\frac{1 - 2x\\ln(x)}{(x^2 + 1)^2}",
+            "problem": "f(x) = ln(x)/(ax^2 + 1)",
+            "problem_latex": "f(x) = \\frac{\\ln(x)}{ax^2 + 1}",
+            "solution": "f'(x) = ((1 - 2axln(x))/((ax^2 + 1)^2)",
+            "solution_latex": "f'(x) = \\frac{1 - 2a x\\ln(x)}{(a x^2 + 1)^2}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "ln_x_a_x2"
         },
         {
             "id": 57,
-            "problem": "f(x) = x^2 e^{1/x}",
-            "problem_latex": "f(x) = x^2 e^{1/x}",
-            "solution": "f'(x) = 2x e^{1/x} - e^{1/x}/x",
-            "solution_latex": "f'(x) = 2x e^{1/x} - e^{1/x}/x",
+            "problem": "f(x) = x^a e^{1/x}",
+            "problem_latex": "f(x) = x^a e^{1/x}",
+            "solution": "f'(x) = a*x^(a-1) e^(1/x) - e^(1/x)/x^(2-a)",
+            "solution_latex": "f'(x) = a x^{a-1} e^{1/x} - \\frac{e^{1/x}}{x^{2-a}}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "power_e_x"
         },
         {
             "id": 58,
-            "problem": "f(x) = e^{xsin(x)}",
-            "problem_latex": "f(x) = e^{x\\sin(x)}",
-            "solution": "f'(x) = e^{xsin(x)}(sin(x) + xcos(x))",
-            "solution_latex": "f'(x) = e^{x\\sin(x)}(\\sin(x) + x\\cos(x))",
+            "problem": "f(x) = e^{axsin(x)}",
+            "problem_latex": "f(x) = e^{ax\\sin(x)}",
+            "solution": "f'(x) = e^{axsin(x)}(asin(x) + axcos(x))",
+            "solution_latex": "f'(x) = e^{ax\\sin(x)}(a\\sin(x) + ax\\cos(x))",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "e_ax_sin_x"
         },
         {
             "id": 59,
-            "problem": "f(x) = ln(sin(x) + cos(x))",
-            "problem_latex": "f(x) = \\ln(\\sin(x) + \\cos(x))",
-            "solution": "f'(x) = (cos(x) - sin(x))/(sin(x) + cos(x))",
-            "solution_latex": "f'(x) = \\frac{\\cos(x) - \\sin(x)}{\\sin(x) + \\cos(x)}",
+            "problem": "f(x) = ln(sin(x) + acos(x))",
+            "problem_latex": "f(x) = \\ln(\\sin(x) + a\\cos(x))",
+            "solution": "f'(x) = (cos(x) - asin(x))/(sin(x) + acos(x))",
+            "solution_latex": "f'(x) = \\frac{\\cos(x) - a\\sin(x)}{\\sin(x) + a\\cos(x)}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "ln_sin_x_a_cos_x"
         },
         {
             "id": 60,
-            "problem": "f(x) = tan^{-1}(1/x)",
-            "problem_latex": "f(x) = \\tan^{-1}\\left(\\frac{1}{x}\\right)",
-            "solution": "f'(x) = -1/(x^2 + 1)",
-            "solution_latex": "f'(x) = -\\frac{1}{x^2 + 1}",
+            "problem": "f(x) = tan^{-1}(a/x)",
+            "problem_latex": "f(x) = \\tan^{-1}\\left(\\frac{a}{x}\\right)",
+            "solution": "f'(x) = -a/(x^2 + a^2)",
+            "solution_latex": "f'(x) = -\\frac{a}{x^2 + a^2}",
             "topic": "differentiation",
-            "difficulty": "hard"
+            "difficulty": "hard",
+            "variable_type": "arctan_a_x"
         }
     ],
     "ultimate": [
@@ -561,7 +590,8 @@
             "solution": "f'(x) = x^{x^x}(ln(x^x) + x^{x-1}(ln(x) + 1))",
             "solution_latex": "f'(x) = x^{x^x} \\left( \\ln(x^x) + x^{x-1}(\\ln(x) + 1) \\right)",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "none"
         },
         {
             "id": 62,
@@ -570,7 +600,8 @@
             "solution": "f'(x) = e^{x^3 ln(x)}(3x^2 ln(x) + x^2)",
             "solution_latex": "f'(x) = e^{x^3 \\ln(x)} \\left(3x^2 \\ln(x) + x^2\\right)",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "none"
         },
         {
             "id": 63,
@@ -579,340 +610,378 @@
             "solution": "f'(x) = 2x e^{x^2}/(1 + e^{2x^2})",
             "solution_latex": "f'(x) = \\frac{2x e^{x^2}}{1 + e^{2x^2}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "none"
         },
         {
             "id": 64,
-            "problem": "f(x) = ln(sin(x^2))",
-            "problem_latex": "f(x) = \\ln(\\sin(x^2))",
-            "solution": "f'(x) = 2xcos(x^2)/sin(x^2)",
-            "solution_latex": "f'(x) = \\frac{2x\\cos(x^2)}{\\sin(x^2)}",
+            "problem": "f(x) = ln(sin(ax^2))",
+            "problem_latex": "f(x) = \\ln(\\sin(ax^2))",
+            "solution": "f'(x) = 2axcos(ax^2)/sin(ax^2)",
+            "solution_latex": "f'(x) = \\frac{2ax\\cos(ax^2)}{\\sin(ax^2)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "chain_rule_sin_ax2"
         },
         {
             "id": 65,
-            "problem": "f(x) = x^{x^2}",
-            "problem_latex": "f(x) = x^{x^2}",
-            "solution": "f'(x) = x^{x^2}(2xln(x) + 1)",
-            "solution_latex": "f'(x) = x^{x^2}(2x\\ln(x) + 1)",
+            "problem": "f(x) = x^{x^a}",
+            "problem_latex": "f(x) = x^{x^a}",
+            "solution": "f'(x) = x^(x^a)(ln(x^a) + x^(a-1)ln(x))",
+            "solution_latex": "f'(x) = x^{x^a}(x^a\\ln(x) + x^{a-1}\\ln(x))",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "power_rule_x_xa"
         },
         {
             "id": 66,
-            "problem": "f(x) = tan^{-1}(ln(x))",
-            "problem_latex": "f(x) = \\tan^{-1}\\left(\\ln(x)\\right)",
-            "solution": "f'(x) = 1/(x(1 + (ln(x))^2))",
-            "solution_latex": "f'(x) = \\frac{1}{x(1 + (\\ln(x))^2)}",
+            "problem": "f(x) = tan^{-1}(ln(ax))",
+            "problem_latex": "f(x) = \\tan^{-1}\\left(\\ln(ax)\\right)",
+            "solution": "f'(x) = 1/(x(1 + (ln(ax))^2))",
+            "solution_latex": "f'(x) = \\frac{1}{x(1 + (\\ln(ax))^2)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "arctan_ln_ax"
         },
         {
             "id": 67,
-            "problem": "f(x) = ln(e^x + e^{-x})",
-            "problem_latex": "f(x) = \\ln\\left(e^x + e^{-x}\\right)",
-            "solution": "f'(x) = tanh(x)",
-            "solution_latex": "f'(x) = \\tanh(x)",
+            "problem": "f(x) = ln(e^{ax} + e^{-ax})",
+            "problem_latex": "f(x) = \\ln\\left(e^{ax} + e^{-ax}\\right)",
+            "solution": "f'(x) = (e^{ax} - e^{-ax})/(e^{ax} + e^{-ax})",
+            "solution_latex": "f'(x) = \\frac{ae^{ax} - ae^{-ax}}{e^{ax} + e^{-ax}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_exp_coeff"
         },
         {
             "id": 68,
-            "problem": "f(x) = sqrt(ln(x^2 + 1))",
-            "problem_latex": "f(x) = \\sqrt{\\ln(x^2 + 1)}",
-            "solution": "f'(x) = x/(sqrt(ln(x^2 + 1))(x^2 + 1))",
-            "solution_latex": "f'(x) = \\frac{x}{\\sqrt{\\ln(x^2 + 1)}(x^2 + 1)}",
+            "problem": "f(x) = sqrt(ln(x^2 + a))",
+            "problem_latex": "f(x) = \\sqrt{\\ln(x^2 + a)}",
+            "solution": "f'(x) = x/((x^2 + a)sqrt(ln(x^2 + a)))",
+            "solution_latex": "f'(x) = \\frac{x}{(x^2 + a)\\sqrt{\\ln(x^2 + a)}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "sqrt_ln_x2_coeff"
         },
         {
             "id": 69,
-            "problem": "f(x) = e^{sin(x^2)}",
-            "problem_latex": "f(x) = e^{\\sin(x^2)}",
-            "solution": "f'(x) = 2xcos(x^2)e^{sin(x^2)}",
-            "solution_latex": "f'(x) = 2x\\cos(x^2)e^{\\sin(x^2)}",
+            "problem": "f(x) = e^{sin(ax^2)}",
+            "problem_latex": "f(x) = e^{\\sin(ax^2)}",
+            "solution": "f'(x) = 2axcos(ax^2)e^{sin(ax^2)}",
+            "solution_latex": "f'(x) = 2ax\\cos(ax^2)e^{\\sin(ax^2)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "e_sin_ax2"
         },
         {
             "id": 70,
-            "problem": "f(x) = ln(arctan(x^2))",
-            "problem_latex": "f(x) = \\ln\\left(\\tan^{-1}(x^2)\\right)",
-            "solution": "f'(x) = 4x/(1 + x^4)",
-            "solution_latex": "f'(x) = \\frac{4x}{1 + x^4}",
+            "problem": "f(x) = ln(arctan(ax^2))",
+            "problem_latex": "f(x) = \\ln\\left(\\arctan(ax^2)\\right)",
+            "solution": "f'(x) = 2ax^3/(1 + a^2x^4)",
+            "solution_latex": "f'(x) = \\frac{2ax}{1 + a^2x^4}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_arctan_ax2"
         },
         {
             "id": 71,
-            "problem": "f(x) = x^x sin(x)",
-            "problem_latex": "f(x) = x^x \\sin(x)",
-            "solution": "f'(x) = x^x(ln(x) + 1)sin(x) + x^x cos(x)",
-            "solution_latex": "f'(x) = x^x (\\ln(x) + 1)\\sin(x) + x^x \\cos(x)",
+            "problem": "f(x) = x^x sin(ax)",
+            "problem_latex": "f(x) = x^x \\sin(ax)",
+            "solution": "f'(x) = x^x(ln(x) + 1)sin(ax) + ax^x cos(ax)",
+            "solution_latex": "f'(x) = x^x (\\ln(x) + 1)\\sin(ax) + ax^x \\cos(ax)",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "product_rule_x_sin_ax"
         },
         {
             "id": 72,
-            "problem": "f(x) = e^{x cos(x)}",
-            "problem_latex": "f(x) = e^{x \\cos(x)}",
-            "solution": "f'(x) = e^{x cos(x)}(-x sin(x) + cos(x))",
-            "solution_latex": "f'(x) = e^{x \\cos(x)}(-x \\sin(x) + \\cos(x))",
+            "problem": "f(x) = e^{x cos(ax)}",
+            "problem_latex": "f(x) = e^{x \\cos(ax)}",
+            "solution": "f'(x) = e^{x cos(ax)}(-ax sin(ax) + cos(ax))",
+            "solution_latex": "f'(x) = e^{x \\cos(ax)}(-ax \\sin(ax) + \\cos(ax))",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "e_x_cos_ax"
         },
         {
             "id": 73,
-            "problem": "f(x) = sin(x^2)/sqrt(x)",
-            "problem_latex": "f(x) = \\frac{\\sin(x^2)}{\\sqrt{x}}",
-            "solution": "f'(x) = 2xcos(x^2)/sqrt(x) - sin(x^2)/(2x^(3/2))",
-            "solution_latex": "f'(x) = \\frac{2x \\cos(x^2)}{\\sqrt{x}} - \\frac{\\sin(x^2)}{2x^{3/2}}",
+            "problem": "f(x) = sin(ax^2)/sqrt(x)",
+            "problem_latex": "f(x) = \\frac{\\sin(ax^2)}{\\sqrt{x}}",
+            "solution": "f'(x) = (2ax^2*cos(ax^2) - sin(ax^2))/(2x^(3/2))",
+            "solution_latex": "f'(x) = \\frac{2ax^2\\cos(ax^2) - \\sin(ax^2)}{2x^{3/2}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "quotient_rule_sin_ax2"
         },
         {
             "id": 74,
-            "problem": "f(x) = tan^{-1}(e^x + e^{-x})",
-            "problem_latex": "f(x) = \\tan^{-1}\\left(e^x + e^{-x}\\right)",
-            "solution": "f'(x) = (e^x - e^{-x})/(1 + (e^x + e^{-x})^2)",
-            "solution_latex": "f'(x) = \\frac{e^x - e^{-x}}{1 + (e^x + e^{-x})^2}",
+            "problem": "f(x) = tan^{-1}(e^{ax} + e^{-ax})",
+            "problem_latex": "f(x) = \\tan^{-1}\\left(e^{ax} + e^{-ax}\\right)",
+            "solution": "f'(x) = a(e^{ax} - e^{-ax})/(1 + (e^{ax} + e^{-ax})^2)",
+            "solution_latex": "f'(x) = \\frac{a(e^{ax} - e^{-ax})}{1 + (e^{ax} + e^{-ax})^2}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "arctan_exp_ax"
         },
         {
             "id": 75,
-            "problem": "f(x) = ln(x + sqrt(x^2 - 1))",
-            "problem_latex": "f(x) = \\ln\\left(x + \\sqrt{x^2 - 1}\\right)",
-            "solution": "f'(x) = 1/sqrt(x^2 - 1)",
-            "solution_latex": "f'(x) = \\frac{1}{\\sqrt{x^2 - 1}}",
+            "problem": "f(x) = ln(ax + sqrt(x^2 - 1))",
+            "problem_latex": "f(x) = \\ln\\left(ax + \\sqrt{x^2 - 1}\\right)",
+            "solution": "f'(x) = a/sqrt(x^2 - 1)",
+            "solution_latex": "f'(x) = \\frac{a}{\\sqrt{x^2 - 1}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_ax_sqrt"
         },
         {
             "id": 76,
-            "problem": "f(x) = x^{tan(x)}",
-            "problem_latex": "f(x) = x^{\\tan(x)}",
-            "solution": "f'(x) = x^{tan(x)}(tan(x)ln(x) + sec^2(x)ln(x))",
-            "solution_latex": "f'(x) = x^{\\tan(x)} \\left(\\tan(x)\\ln(x) + \\sec^2(x)\\ln(x)\\right)",
+            "problem": "f(x) = x^{tan(ax)}",
+            "problem_latex": "f(x) = x^{\\tan(ax)}",
+            "solution": "f'(x) = x^(tan(ax))(a*sec^2(ax)ln(x) + tan(ax)/x)",
+            "solution_latex": "f'(x) = x^{\\tan(ax)}(a\\sec^2(ax)\\ln(x) + \\frac{\\tan(ax)}{x})",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "power_rule_tan_ax"
         },
         {
             "id": 77,
-            "problem": "f(x) = e^{ln(x^2 + 1)}",
-            "problem_latex": "f(x) = e^{\\ln(x^2 + 1)}",
-            "solution": "f'(x) = 2x e^{ln(x^2 + 1)}/(x^2 + 1)",
-            "solution_latex": "f'(x) = \\frac{2x e^{\\ln(x^2 + 1)}}{x^2 + 1}",
+            "problem": "f(x) = e^{ln(ax^2 + 1)}",
+            "problem_latex": "f(x) = e^{\\ln(ax^2 + 1)}",
+            "solution": "f'(x) = 2ax e^{ln(ax^2 + 1)}/(ax^2 + 1)",
+            "solution_latex": "f'(x) = \\frac{2ax e^{\\ln(ax^2 + 1)}}{ax^2 + 1}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "e_ln_ax2"
         },
         {
             "id": 78,
-            "problem": "f(x) = sqrt(x^2 + 2x + 1) ln(x)",
-            "problem_latex": "f(x) = \\sqrt{x^2 + 2x + 1} \\ln(x)",
-            "solution": "(x+1)ln(x)/sqrt(x^2 + 2x + 1) + sqrt(x^2 + 2x + 1)/x",
-            "solution_latex": "\\frac{(x+1)\\ln(x)}{\\sqrt{x^2 + 2x + 1}} + \\frac{\\sqrt{x^2 + 2x + 1}}{x}",
+            "problem": "f(x) = sqrt(x^2 + 2ax + a^2) ln(x)",
+            "problem_latex": "f(x) = \\sqrt{x^2 + 2ax + a^2} \\ln(x)",
+            "solution": "((x+a)ln(x))/sqrt(x^2 + 2ax + a^2) + sqrt(x^2 + 2ax + a^2)/x",
+            "solution_latex": "\\frac{(x+a)\\ln(x)}{\\sqrt{x^2 + 2ax + a^2}} + \\frac{\\sqrt{x^2 + 2ax + a^2}}{x}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "sqrt_x2_ax"
         },
         {
             "id": 79,
-            "problem": "f(x) = e^x/(x^2 + 1)",
-            "problem_latex": "f(x) = \\frac{e^x}{x^2 + 1}",
-            "solution": "f'(x) = (e^x(x^2 + 1) - 2xe^x)/(x^2 + 1)^2",
-            "solution_latex": "f'(x) = \\frac{e^x(x^2 + 1) - 2xe^x}{(x^2 + 1)^2}",
+            "problem": "f(x) = e^{ax}/(x^2 + 1)",
+            "problem_latex": "f(x) = \\frac{e^{ax}}{x^2 + 1}",
+            "solution": "(e^(ax)(x^2 + 1) - 2x*e^(ax))/(x^2 + 1)^2",
+            "solution_latex": "\\frac{e^{ax}(x^2 + 1) - 2axe^{ax}}{(x^2 + 1)^2}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "quotient_e_ax"
         },
         {
             "id": 80,
-            "problem": "f(x) = ln(x^2 + 2x + 1)",
-            "problem_latex": "f(x) = \\ln(x^2 + 2x + 1)",
-            "solution": "f'(x) = (2x + 2)/(x^2 + 2x + 1)",
-            "solution_latex": "f'(x) = \\frac{2x + 2}{x^2 + 2x + 1}",
+            "problem": "f(x) = ln(x^2 + 2ax + a^2)",
+            "problem_latex": "f(x) = \\ln(x^2 + 2ax + a^2)",
+            "solution": "f'(x) = (2x + 2a)/(x^2 + 2ax + a^2)",
+            "solution_latex": "f'(x) = \\frac{2x + 2a}{x^2 + 2ax + a^2}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_x2_ax"
         },
         {
             "id": 81,
-            "problem": "f(x) = x^{x^3}",
-            "problem_latex": "f(x) = x^{x^3}",
-            "solution": "f'(x) = x^{x^3}(3x^2 ln(x) + x^2)",
-            "solution_latex": "f'(x) = x^{x^3} \\left(3x^2 \\ln(x) + x^2\\right)",
+            "problem": "f(x) = x^{x^a}",
+            "problem_latex": "f(x) = x^{x^a}",
+            "solution": "f'(x) = x^{x^a}(a*x^(a-1)*ln(x) + x^(a-1))",
+            "solution_latex": "f'(x) = x^{x^a}(x^a\\ln(x) + a x^{a-1})",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "power_rule_x_xa"
         },
         {
             "id": 82,
-            "problem": "f(x) = arctan(ln(x)/sqrt(x))",
-            "problem_latex": "f(x) = \\arctan\\left(\\frac{\\ln(x)}{\\sqrt{x}}\\right)",
-            "solution": "f'(x) = ((ln(x) + 2) / (x^(3/2))) / (1 + (ln(x)/sqrt(x))^2)",
-            "solution_latex": "f'(x) = \\frac{\\ln(x) + 2}{x\\sqrt{x}(1 + (\\ln(x)/\\sqrt{x})^2)}",
+            "problem": "f(x) = arctan(ln(ax)/sqrt(x))",
+            "problem_latex": "f(x) = \\arctan\\left(\\frac{\\ln(ax)}{\\sqrt{x}}\\right)",
+            "solution": "f'(x) = (x + ln(ax))/((x*sqrt(x)*(1 + (ln(ax)/sqrt(x))^2))",
+            "solution_latex": "f'(x) = \\frac{a (1 + \\ln(x))}{x\\sqrt{x}(1 + (\\ln(ax)/\\sqrt{x})^2)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "arctan_ln_ax_x"
         },
         {
             "id": 83,
-            "problem": "f(x) = ln(cos(x))^2",
-            "problem_latex": "f(x) = \\ln(\\cos(x))^2",
-            "solution": "-2tan(x)",
-            "solution_latex": "-2\\tan(x)",
+            "problem": "f(x) = ln(cos(x))^a",
+            "problem_latex": "f(x) = \\ln(\\cos(x))^a",
+            "solution": "f'(x) = -a*tan(x)ln(cos(x))^(a-1)",
+            "solution_latex": "f'(x) = -a\\tan(x)\\ln(\\cos(x))^{a-1}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "power_rule_ln_cos"
         },
         {
             "id": 84,
-            "problem": "f(x) = e^{sin(x)}ln(x)",
-            "problem_latex": "f(x) = e^{\\sin(x)}\\ln(x)",
-            "solution": "f'(x) = e^{sin(x)}ln(x)cos(x) + e^{sin(x)}/x",
-            "solution_latex": "f'(x) = e^{\\sin(x)}\\ln(x)\\cos(x) + \\frac{e^{\\sin(x)}}{x}",
+            "problem": "f(x) = e^{sin(x)}ln(ax)",
+            "problem_latex": "f(x) = e^{\\sin(x)}\\ln(ax)",
+            "solution": "f'(x) = e^(sin(x)ln(ax)cos(x) + e^(sin(x))/x",
+            "solution_latex": "f'(x) = e^{\\sin(x)}\\ln(ax)\\cos(x) + \\frac{e^{\\sin(x)}}{x}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "product_rule_e_sin_ln_ax"
         },
         {
             "id": 85,
-            "problem": "f(x) = arctan(e^{x ln(x)})",
-            "problem_latex": "f(x) = \\arctan(e^{x \\ln(x)})",
-            "solution": "f'(x) = e^{x ln(x)}(ln(x) + 1) / (1 + e^{2x ln(x)})",
-            "solution_latex": "f'(x) = \\frac{e^{x \\ln(x)}(\\ln(x) + 1)}{1 + e^{2x \\ln(x)}}",
+            "problem": "f(x) = arctan(e^{ax ln(x)})",
+            "problem_latex": "f(x) = \\arctan(e^{ax \\ln(x)})",
+            "solution": "f'(x) = e^(axln(x))(a(ln(x) + 1))/(1 + e^(2axln(x)))",
+            "solution_latex": "f'(x) = \\frac{e^{ax \\ln(x)}(a(\\ln(x) + 1))}{1 + e^{2ax \\ln(x)}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "arctan_e_ax_ln_x"
         },
         {
             "id": 86,
-            "problem": "f(x) = ln(sin(x^3))",
-            "problem_latex": "f(x) = \\ln(\\sin(x^3))",
-            "solution": "f'(x) = 3x^2cos(x^3)/sin(x^3)",
-            "solution_latex": "f'(x) = \\frac{3x^2 \\cos(x^3)}{\\sin(x^3)}",
+            "problem": "f(x) = ln(sin(ax^3))",
+            "problem_latex": "f(x) = \\ln(\\sin(ax^3))",
+            "solution": "f'(x) = (3ax^2cos(ax^3)/sin(ax^3))",
+            "solution_latex": "f'(x) = \\frac{3ax^2 \\cos(ax^3)}{\\sin(ax^3)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_sin_ax3"
         },
         {
             "id": 87,
-            "problem": "f(x) = x^{e^x}",
-            "problem_latex": "f(x) = x^{e^x}",
-            "solution": "f'(x) = x^{e^x}(e^x ln(x) + 1/x)",
-            "solution_latex": "f'(x) = x^{e^x}\\left(e^x \\ln(x) + \\frac{1}{x}\\right)",
+            "problem": "f(x) = x^{e^{ax}}",
+            "problem_latex": "f(x) = x^{e^{ax}}",
+            "solution": "f'(x) = x^(e^ax)(ae^xln(x) + 1/x)",
+            "solution_latex": "f'(x) = x^{e^{ax}}\\left(a*e^{ax} \\ln(x) + \\frac{1}{x}\\right)",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "x_exp_ax"
         },
         {
             "id": 88,
-            "problem": "f(x) = ln(sqrt(tan(x)))",
-            "problem_latex": "f(x) = \\ln\\left(\\sqrt{\\tan(x)}\\right)",
-            "solution": "f'(x) = 1/(2tan(x)cos^2(x))",
-            "solution_latex": "f'(x) = \\frac{1}{2 \\tan(x)\\cos^2(x)}",
+            "problem": "f(x) = ln(sqrt(tan(ax)))",
+            "problem_latex": "f(x) = \\ln\\left(\\sqrt{\\tan(ax)}\\right)",
+            "solution": "f'(x) = a/(2tan(ax)cos^2(ax))",
+            "solution_latex": "f'(x) = \\frac{a}{2 \\tan(ax)\\cos^2(ax)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_sqrt_tan_ax"
         },
         {
             "id": 89,
-            "problem": "f(x) = e^{x^x ln(x)}",
-            "problem_latex": "f(x) = e^{x^x \\ln(x)}",
-            "solution": "f'(x) = e^{x^x ln(x)}(x^{x-1}(ln(x) + 1) + x^x/x)",
-            "solution_latex": "f'(x) = e^{x^x \\ln(x)}\\left(x^{x-1}(\\ln(x) + 1) + \\ln(x)\\right)",
+            "problem": "f(x) = e^{x^x ln(ax)}",
+            "problem_latex": "f(x) = e^{x^x \\ln(ax)}",
+            "solution": "f'(x) = e^(x^xln(ax))(a*x^(x-1)(ln(ax) + 1) + x^x/(ax)",
+            "solution_latex": "f'(x) = e^{x^x \\ln(ax)}\\left(x^{x-1}(\\ln(ax) + 1) + \\frac{x^x}{x}\\right)",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "e_x_x_ln_ax"
         },
         {
             "id": 90,
-            "problem": "f(x) = ln(ln(sin(x)))",
-            "problem_latex": "f(x) = \\ln\\left(\\ln(\\sin(x))\\right)",
-            "solution": "f'(x) = cot(x)/ln(sin(x))",
-            "solution_latex": "f'(x) = \\frac{\\cot(x)}{\\ln(\\sin(x))}",
+            "problem": "f(x) = ln(ln(sin(ax)))",
+            "problem_latex": "f(x) = \\ln\\left(\\ln(\\sin(ax))\\right)",
+            "solution": "f'(x) = a*cot(ax)/ln(sin(ax))",
+            "solution_latex": "f'(x) = \\frac{a\\cot(ax)}{\\ln(\\sin(ax))}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_ln_sin_ax"
         },
         {
             "id": 91,
-            "problem": "f(x) = arcsin(e^{x^2})",
-            "problem_latex": "f(x) = \\arcsin(e^{x^2})",
-            "solution": "f'(x) = 2x e^{x^2}/sqrt(1 - e^{2x^2})",
-            "solution_latex": "f'(x) = \\frac{2x e^{x^2}}{\\sqrt{1 - e^{2x^2}}}",
+            "problem": "f(x) = arcsin(e^{ax^2})",
+            "problem_latex": "f(x) = \\arcsin(e^{ax^2})",
+            "solution": "f'(x) = 2axe^(ax^2)/sqrt(1 - e^(2ax^2))",
+            "solution_latex": "f'(x) = \\frac{2ax e^{ax^2}}{\\sqrt{1 - e^{2ax^2}}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "arcsin_e_ax2"
         },
         {
             "id": 92,
-            "problem": "f(x) = tan^{-1}(sin(x)/cos(x))",
-            "problem_latex": "f(x) = \\tan^{-1}\\left(\\frac{\\sin(x)}{\\cos(x)}\\right)",
-            "solution": "1",
-            "solution_latex": "1",
+            "problem": "f(x) = tan^{-1}(sin(ax)/cos(ax))",
+            "problem_latex": "f(x) = \\tan^{-1}\\left(\\frac{\\sin(ax)}{\\cos(ax)}\\right)",
+            "solution": "a",
+            "solution_latex": "a",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "arctan_sin_ax"
         },
         {
             "id": 93,
-            "problem": "f(x) = x^{e^{ln(x)}}",
-            "problem_latex": "f(x) = x^{e^{\\ln(x)}}",
-            "solution": "f'(x) = x^x(ln(x) + 1)",
-            "solution_latex": "f'(x) = x^x(\\ln(x) + 1)",
+            "problem": "f(x) = x^{e^{a ln(x)}}",
+            "problem_latex": "f(x) = x^{e^{a \\ln(x)}}",
+            "solution": "f'(x) = x^(e^(alnx))(a/x + (1/x)e^(alnx)ln(x))",
+            "solution_latex": "f'(x) = x^{e^{a\\ln(x)}} a",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "power_rule_exp_a_ln_x"
         },
         {
             "id": 94,
-            "problem": "f(x) = ln(x^x + x^{2x})",
-            "problem_latex": "f(x) = \\ln(x^x + x^{2x})",
-            "solution": "f'(x) = (x^{x-1}(ln(x) + 1) + 2x^{2x-1}(ln(x) + 1))/(x^x + x^{2x})",
-            "solution_latex": "f'(x) = \\frac{x^{x-1}(\\ln(x) + 1) + 2x^{2x-1}(\\ln(x) + 1)}{x^x + x^{2x}}",
+            "problem": "f(x) = ln(x^x + x^{ax})",
+            "problem_latex": "f(x) = \\ln(x^x + x^{ax})",
+            "solution": "(x^(x-1)*(ln(x) + 1) + ax^(ax-1)ln(x))/(x^x + x^(ax)",
+            "solution_latex": "\\frac{x^{x-1}(\\ln(x) + 1) + ax^{ax-1}(\\ln(x))}{x^x + x^{ax}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_x_ax"
         },
         {
             "id": 95,
-            "problem": "f(x) = tan(x^2)/ln(x)",
-            "problem_latex": "f(x) = \\frac{\\tan(x^2)}{\\ln(x)}",
-            "solution": "(2x sec^2(x^2)ln(x) - tan(x^2)/x)/(ln(x))^2",
-            "solution_latex": "\\frac{2x \\sec^2(x^2)\\ln(x) - \\tan(x^2)/x}{(\\ln(x))^2}",
+            "problem": "f(x) = tan(ax^2)/ln(x)",
+            "problem_latex": "f(x) = \\frac{\\tan(ax^2)}{\\ln(x)}",
+            "solution": "(2axsec^2(ax^2)ln(x) - tan(ax^2)/x)/(ln(x))^2",
+            "solution_latex": "\\frac{2ax \\sec^2(ax^2)\\ln(x) - \\frac{\\tan(ax^2)}{x}}{(\\ln(x))^2}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "quotient_rule_tan_ax2"
         },
         {
             "id": 96,
-            "problem": "f(x) = sqrt(arctan(x^2))",
-            "problem_latex": "f(x) = \\sqrt{\\tan^{-1}(x^2)}",
-            "solution": "2x/((1 + x^4)sqrt(arctan(x^2)))",
-            "solution_latex": "\\frac{2x}{\\sqrt{\\tan^{-1}(x^2)}(1 + x^4)}",
+            "problem": "f(x) = sqrt(arctan(ax^2))",
+            "problem_latex": "f(x) = \\sqrt{\\tan^{-1}(ax^2)}",
+            "solution": "2ax/((1 + a^2x^4)sqrt(arctan(ax^2)))",
+            "solution_latex": "\\frac{2ax}{\\sqrt{\\arctan(ax^2)}(1 + a^2x^4)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "sqrt_arctan_ax2"
         },
         {
             "id": 97,
-            "problem": "f(x) = ln(arctan(x^3))",
-            "problem_latex": "f(x) = \\ln\\left(\\arctan(x^3)\\right)",
-            "solution": "f'(x) = 3x^2/(x^6 + 1)",
-            "solution_latex": "f'(x) = \\frac{3x^2}{x^6 + 1}",
+            "problem": "f(x) = ln(arctan(ax^3))",
+            "problem_latex": "f(x) = \\ln\\left(\\arctan(ax^3)\\right)",
+            "solution": "f'(x) = 3ax^2/(1 + a^2x^6)",
+            "solution_latex": "f'(x) = \\frac{3ax^2}{1 + a^2x^6}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_arctan_ax3"
         },
         {
             "id": 98,
-            "problem": "f(x) = e^{sin(x^2 + 1)}",
-            "problem_latex": "f(x) = e^{\\sin(x^2 + 1)}",
-            "solution": "f'(x) = 2x cos(x^2 + 1) e^{sin(x^2 + 1)}",
-            "solution_latex": "f'(x) = 2x \\cos(x^2 + 1) e^{\\sin(x^2 + 1)}",
+            "problem": "f(x) = e^{sin(ax^2 + a)}",
+            "problem_latex": "f(x) = e^{\\sin(ax^2 + a)}",
+            "solution": "f'(x) = 2ax*cos(ax^2 + a)e^(sin(ax^2 + a))",
+            "solution_latex": "f'(x) = 2ax \\cos(ax^2 + a) e^{\\sin(ax^2 + a)}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "e_sin_ax2_a"
         },
         {
             "id": 99,
-            "problem": "f(x) = arctan(e^{sin(x)})",
-            "problem_latex": "f(x) = \\arctan\\left(e^{\\sin(x)}\\right)",
-            "solution": "f'(x) = cos(x)e^{sin(x)}/(1 + e^{2sin(x)})",
-            "solution_latex": "f'(x) = \\frac{\\cos(x)e^{\\sin(x)}}{1 + e^{2\\sin(x)}}",
+            "problem": "f(x) = arctan(e^{a sin(x)})",
+            "problem_latex": "f(x) = \\arctan\\left(e^{a\\sin(x)}\\right)",
+            "solution": "f'(x) = a*cos(x)e^{a sin(x)}/(1 + e^(2a sin(x)))",
+            "solution_latex": "f'(x) = \\frac{a \\cos(x)e^{a\\sin(x)}}{1 + e^{2a\\sin(x)}}",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "arctan_e_a_sin_x"
         },
         {
             "id": 100,
-            "problem": "f(x) = ln(x^{x^x})",
-            "problem_latex": "f(x) = \\ln(x^{x^x})",
-            "solution": "(x^x(ln(x)+1)/x^x)*ln(x) + x^x(ln(x) + 1)",
-            "solution_latex": "x^x(\\ln(x) + 1)\\ln(x) + x^{x-1}(\\ln(x) + 1)",
+            "problem": "f(x) = ln(x^{x^a})",
+            "problem_latex": "f(x) = \\ln(x^{x^a})",
+            "solution": "a*x^(a-1)(ln(x)+1)ln(x) + x^(a)ln(x) + x^(a-1)ln(x)",
+            "solution_latex": "x^{a}(\\ln(x) + 1)\\ln(x) + x^{a-1}(\\ln(x) + 1)",
             "topic": "differentiation",
-            "difficulty": "ultimate"
+            "difficulty": "ultimate",
+            "variable_type": "ln_x_xa"
         }
     ]
 }
