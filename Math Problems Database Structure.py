@@ -6,12 +6,13 @@ differentiation_problems = {
     "easy": [
         {
             "id": 1,
-            "problem": "f(x) = x^5",
-            "problem_latex": r"f(x) = x^5",
-            "solution": "f'(x) = 5x^4",
-            "solution_latex": r"f'(x) = 5x^4",
+            "problem": "f(x) = x^a",
+            "problem_latex": r"f(x) = x^a",
+            "solution": "f'(x) = a*x^(a-1)",
+            "solution_latex": r"f'(x) = a*x^(a-1)",
             "topic": "differentiation",
-            "difficulty": "easy"
+            "difficulty": "easy",
+            "variable_type": "power_rule"
         },
         {
             "id": 2,
@@ -24,30 +25,33 @@ differentiation_problems = {
         },
         {
             "id": 3,
-            "problem": "f(x) = e^{2x}",
-            "problem_latex": r"f(x) = e^{2x}",
-            "solution": "f'(x) = 2e^{2x}",
-            "solution_latex": r"f'(x) = 2e^{2x}",
+            "problem": "f(x) = e^{ax}",
+            "problem_latex": r"f(x) = e^{ax}",
+            "solution": "f'(x) = a*e^{ax}",
+            "solution_latex": r"f'(x) = a*e^{ax}",
             "topic": "differentiation",
-            "difficulty": "easy"
+            "difficulty": "easy",
+            "variable_type": "e_rule"
         },
         {
             "id": 4,
-            "problem": "f(x) = ln(3x)",
-            "problem_latex": r"f(x) = \ln(3x)",
+            "problem": "f(x) = ln(ax)",
+            "problem_latex": r"f(x) = \ln(ax)",
             "solution": "f'(x) = 1/x",
             "solution_latex": r"f'(x) = \frac{1}{x}",
             "topic": "differentiation",
-            "difficulty": "easy"
+            "difficulty": "easy",
+            "variable_type": "ln_coeff"
         },
         {
             "id": 5,
-            "problem": "f(x) = 7x^3 - 4x + 2",
-            "problem_latex": r"f(x) = 7x^3 - 4x + 2",
-            "solution": "f'(x) = 21x^2 - 4",
-            "solution_latex": r"f'(x) = 21x^2 - 4",
+            "problem": "f(x) = ax^3 - bx + c",
+            "problem_latex": r"f(x) = ax^3 - bx + c",
+            "solution": "f'(x) = 3ax^2 - b",
+            "solution_latex": r"f'(x) = 3ax^2 - b",
             "topic": "differentiation",
-            "difficulty": "easy"
+            "difficulty": "easy",
+            "variable_type": "power_rule_coeff"
         },
         {
             "id": 6,
@@ -123,10 +127,10 @@ differentiation_problems = {
         },
         {
             "id": 14,
-            "problem": "f(x) = arctan(2x)",
-            "problem_latex": r"f(x) = \arctan(2x)",
-            "solution": "f'(x) = 2/(1 + 4x^2)",
-            "solution_latex": r"f'(x) = \frac{2}{1 + 4x^2}",
+            "problem": "f(x) = arctan(ax)",
+            "problem_latex": r"f(x) = \arctan(ax)",
+            "solution": "f'(x) = a/(1 + (ax)^2)",
+            "solution_latex": r"f'(x) = \frac{a}{1 + (ax)^2}",
             "topic": "differentiation",
             "difficulty": "easy"
         },
@@ -141,10 +145,10 @@ differentiation_problems = {
         },
         {
             "id": 16,
-            "problem": "f(x) = e^{-x}",
-            "problem_latex": r"f(x) = e^{-x}",
-            "solution": "f'(x) = -e^{-x}",
-            "solution_latex": r"f'(x) = -e^{-x}",
+            "problem": "f(x) = e^{-ax}",
+            "problem_latex": r"f(x) = e^{-ax}",
+            "solution": "f'(x) = -a*e^{-ax}",
+            "solution_latex": r"f'(x) = -a*e^{-ax}",
             "topic": "differentiation",
             "difficulty": "easy"
         },
@@ -233,12 +237,13 @@ differentiation_problems = {
     "medium": [
         {
             "id": 26,
-            "problem": "f(x) = x^2 sin(x)",
-            "problem_latex": r"f(x) = x^2 \sin(x)",
-            "solution": "f'(x) = 2xsin(x) + x^2cos(x)",
-            "solution_latex": r"f'(x) = 2x\sin(x) + x^2\cos(x)",
+            "problem": "f(x) = x^a sin(x)",
+            "problem_latex": r"f(x) = x^a \sin(x)",
+            "solution": "f'(x) = a*x^(a-1)sin(x) + x^a*cos(x)",
+            "solution_latex": r"f'(x) = a*x^(a-1)\sin(x) + x^a\cos(x)",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule"
         },
         {
             "id": 27,
@@ -251,30 +256,33 @@ differentiation_problems = {
         },
         {
             "id": 28,
-            "problem": "f(x) = ln(x^2 + 1)",
-            "problem_latex": r"f(x) = \ln(x^2 + 1)",
-            "solution": "f'(x) = 2x/(x^2 + 1)",
-            "solution_latex": r"f'(x) = \frac{2x}{x^2 + 1}",
+            "problem": "f(x) = ln(x^a + 1)",
+            "problem_latex": r"f(x) = \ln(x^a + 1)",
+            "solution": "f'(x) = a*x^(a-1)/(x^a + 1)",
+            "solution_latex": r"f'(x) = \frac{a*x^(a-1)}{x^a + 1}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "power_rule"
         },
         {
             "id": 29,
-            "problem": "f(x) = arctan(x/2)",
-            "problem_latex": r"f(x) = \arctan\left(\frac{x}{2}\right)",
-            "solution": "f'(x) = 1/(2 + x^2)",
-            "solution_latex": r"f'(x) = \frac{1}{2 + x^2}",
+            "problem": "f(x) = arctan(x/a)",
+            "problem_latex": r"f(x) = \arctan\left(\frac{x}{a}\right)",
+            "solution": "f'(x) = a/(a^2 + x^2)",
+            "solution_latex": r"f'(x) = \frac{a}{a^2 + x^2}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+             "variable_type": "ln_coeff"
         },
         {
             "id": 30,
-            "problem": "f(x) = x e^{x^2}",
-            "problem_latex": r"f(x) = x e^{x^2}",
-            "solution": "f'(x) = (1 + 2x^2)e^{x^2}",
-            "solution_latex": r"f'(x) = (1 + 2x^2) e^{x^2}",
+            "problem": "f(x) = x e^{ax}",
+            "problem_latex": r"f(x) = x e^{ax}",
+            "solution": "f'(x) = (1 + ax)e^{ax}",
+            "solution_latex": r"f'(x) = (1 + ax) e^{ax}",
             "topic": "differentiation",
-            "difficulty": "medium"
+            "difficulty": "medium",
+            "variable_type": "e_rule"
         },
         {
             "id": 31,
