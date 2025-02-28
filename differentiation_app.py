@@ -254,7 +254,7 @@ def main():
                             st.session_state.username = login_username
                             st.session_state.preferences = get_user_preferences(login_username)
                             st.success("Login successful!")
-                            st.experimental_rerun()
+                            st.rerun()  # Updated from experimental_rerun
                         else:
                             st.error("Invalid username or password")
                     else:
@@ -277,7 +277,7 @@ def main():
                             if success:
                                 st.success(message)
                                 st.session_state.show_register = False
-                                st.experimental_rerun()
+                                st.rerun()  # Updated from experimental_rerun
                             else:
                                 st.error(message)
                     else:
@@ -300,7 +300,7 @@ def main():
                 st.session_state.logged_in = False
                 st.session_state.username = None
                 st.session_state.preferences = None
-                st.experimental_rerun()
+                st.rerun()  # Updated from experimental_rerun
         
         # Load user preferences
         user_prefs = st.session_state.preferences
