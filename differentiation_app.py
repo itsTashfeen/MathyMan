@@ -12,7 +12,7 @@ import json
 DATABASE_FILE = 'math_problems.db'
 USER_DB_FILE = 'user_data.db'
 
-# Authentication functions
+# Authentication functions (same as before)
 def init_user_db():
     """Initialize the user database if it doesn't exist"""
     conn = sqlite3.connect(USER_DB_FILE)
@@ -52,7 +52,8 @@ def create_user(username, password):
         "default_topic": "Basics of Differentiation",
         "default_difficulty": "easy",
         "default_num_questions": 5,
-        "dark_mode": False
+        "dark_mode": False,
+        "theme": "light"  # New theme preference
     })
     
     cursor.execute(
@@ -99,7 +100,7 @@ def save_user_preferences(username, preferences):
     conn.commit()
     conn.close()
 
-# Original math problem functions
+# Original math problem functions (same as before)
 def connect_to_db():
     """Connects to the SQLite database."""
     conn = sqlite3.connect(DATABASE_FILE)
@@ -184,34 +185,152 @@ def generate_problem_set(topic: str, difficulty: str, num_questions: int) -> lis
 
     return problem_set
 
+# Helper function to apply a theme (based on your original code's intended functionality)
+def apply_theme(theme: str):
+    """Applies a Streamlit theme based on the given theme name."""
+    if theme == "dark":
+        return """
+            <style>
+            body {
+                color: #fff;
+                background-color: #222;
+            }
+            .st-emotion-cache-1y4068c { /* Streamlit default elements, can vary */
+                background-color: #333;
+                color: #fff;
+                border: 1px solid #444;
+            }
+            .st-emotion-cache-fzvqzx { /* Expanders */
+                background-color: #333;
+                color: #fff;
+                border: 1px solid #444;
+            }
+            .st-emotion-cache-162wq40 { /* Select boxes */
+                background-color: #333;
+                color: #fff;
+            }
+            .st-emotion-cache-10o59y8 { /* Sliders */
+                background-color: #333;
+                color: #fff;
+            }
+            .st-emotion-cache-1kyxreq { /* Buttons */
+                background-color: #4CAF50; /* Green */
+                color: white;
+            }
+            .st-emotion-cache-162wq40 select {  /*Fix for select boxes */
+                 color: black !important;
+            }
+
+            </style>
+        """
+    elif theme == "light":
+        return """
+            <style>
+            body {
+                color: #222;
+                background-color: #fff;
+            }
+            .st-emotion-cache-1y4068c {
+                background-color: #f8f9fa;
+                color: #222;
+                border: 1px solid #ccc;
+            }
+            .st-emotion-cache-fzvqzx {
+                background-color: #f8f9fa;
+                color: #222;
+                border: 1px solid #ccc;
+            }
+            .st-emotion-cache-162wq40 {
+                background-color: #f8f9fa;
+                color: #222;
+            }
+            .st-emotion-cache-10o59y8 {
+                background-color: #f8f9fa;
+                color: #222;
+            }
+            .st-emotion-cache-1kyxreq {
+                background-color: #4CAF50; /* Green */
+                color: white;
+            }
+             .st-emotion-cache-162wq40 select {  /*Fix for select boxes */
+                 color: black !important;
+            }
+            </style>
+        """
+    elif theme == "blue":
+        return """
+            <style>
+            body {
+                color: #fff;
+                background-color: #3498db; /* A nice blue */
+            }
+            .st-emotion-cache-1y4068c {
+                background-color: #2980b9;
+                color: #fff;
+                border: 1px solid #2980b9;
+            }
+            .st-emotion-cache-fzvqzx {
+                background-color: #2980b9;
+                color: #fff;
+                border: 1px solid #2980b9;
+            }
+            .st-emotion-cache-162wq40 {
+                background-color: #2980b9;
+                color: #fff;
+            }
+            .st-emotion-cache-10o59y8 {
+                background-color: #2980b9;
+                color: #fff;
+            }
+             .st-emotion-cache-1kyxreq {
+                background-color: #27ae60; /* Green */
+                color: white;
+            }
+             .st-emotion-cache-162wq40 select {  /*Fix for select boxes */
+                 color: black !important;
+            }
+
+            </style>
+        """
+
+    # More themes can be added here
+
+    else: # Default fallback
+        return apply_theme("light")  # Or any other default theme
+
+
 def main():
     st.set_page_config(page_title="Advanced Math Problem Generator", layout="wide")
-    
+
     # Initialize user database
     init_user_db()
-    
-    # Custom CSS for layout
+
+    # Custom CSS (including the auth-container from before, and the theme application)
     st.markdown(
-        """
+        f"""
         <style>
-        .reportview-container {
+        .reportview-container {{
             padding: 0;
-        }
-        .main .block-container {
+        }}
+        .main .block-container {{
             padding: 2rem;
-        }
-        .auth-container {
+        }}
+        .auth-container {{
             max-width: 500px;
             margin: 0 auto;
             padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             background-color: #f8f9fa;
-        }
+        }}
+        /*  Apply the theme dynamically, note the usage of the apply_theme method */
+        {apply_theme(st.session_state.get('preferences', {}).get('theme', 'light'))}
+
         </style>
         """,
         unsafe_allow_html=True,
     )
+
 
     # Initialize session state for storing login status and user data
     if 'logged_in' not in st.session_state:
@@ -223,9 +342,11 @@ def main():
     if 'show_register' not in st.session_state:
         st.session_state.show_register = False
 
+
     # App title
     st.title("Advanced Math Problem Generator")
     st.markdown("<hr>", unsafe_allow_html=True)
+
 
     # Authentication Section
     if not st.session_state.logged_in:
@@ -236,17 +357,17 @@ def main():
         with toggle_col2:
             if st.button("Switch to Register" if not st.session_state.show_register else "Switch to Login"):
                 st.session_state.show_register = not st.session_state.show_register
-        
+
         # Create the login/register container
         with st.container():
             st.markdown('<div class="auth-container">', unsafe_allow_html=True)
-            
+
             if not st.session_state.show_register:
                 # Login form
                 st.subheader("Login")
                 login_username = st.text_input("Username", key="login_username")
                 login_password = st.text_input("Password", type="password", key="login_password")
-                
+
                 if st.button("Login", key="login_button"):
                     if login_username and login_password:
                         if verify_user(login_username, login_password):
@@ -265,7 +386,7 @@ def main():
                 reg_username = st.text_input("Username", key="reg_username")
                 reg_password = st.text_input("Password", type="password", key="reg_password")
                 reg_password_confirm = st.text_input("Confirm Password", type="password", key="reg_password_confirm")
-                
+
                 if st.button("Register", key="register_button"):
                     if reg_username and reg_password:
                         if reg_password != reg_password_confirm:
@@ -282,9 +403,9 @@ def main():
                                 st.error(message)
                     else:
                         st.warning("Please fill out all fields")
-            
+
             st.markdown('</div>', unsafe_allow_html=True)
-    
+
     # Main Application (when logged in)
     else:
         # User welcome and logout option
@@ -301,23 +422,24 @@ def main():
                 st.session_state.username = None
                 st.session_state.preferences = None
                 st.rerun()  # Updated from experimental_rerun
-        
+
         # Load user preferences
         user_prefs = st.session_state.preferences
         default_topic = user_prefs.get("default_topic") if user_prefs else "Basics of Differentiation"
         default_difficulty = user_prefs.get("default_difficulty") if user_prefs else "easy"
         default_num_questions = user_prefs.get("default_num_questions") if user_prefs else 5
-        
+        current_theme = user_prefs.get("theme", "light")  # Load theme
+
         # Problem Generation Section with tabs
         tabs = st.tabs(["Generate Problems", "User Preferences"])
-        
+
         # Tab 1: Problem Generation
         with tabs[0]:
             col1, col2, col3 = st.columns(3)
-            
+
             topics = get_topics_from_db()
             topic_index = topics.index(default_topic) if default_topic in topics else 0
-            
+
             with col1:
                 topic = st.selectbox("Problem Type", topics, index=topic_index)
             with col2:
@@ -326,7 +448,7 @@ def main():
                 difficulty = st.selectbox("Difficulty", difficulty_options, index=difficulty_index)
             with col3:
                 num_questions = st.slider("Number of Problems", 1, 20, default_num_questions)
-            
+
             if st.button("Generate Problems"):
                 # Save current selections as preferences
                 if not st.session_state.preferences:
@@ -335,56 +457,64 @@ def main():
                 st.session_state.preferences["default_difficulty"] = difficulty
                 st.session_state.preferences["default_num_questions"] = num_questions
                 save_user_preferences(st.session_state.username, st.session_state.preferences)
-                
+
                 # Generate and display problems
                 problem_set = generate_problem_set(topic, difficulty, num_questions)
-                
+
                 for i, problem in enumerate(problem_set):
                     st.subheader(f"Question {i+1}")
                     st.latex(problem["problem_latex"])
                     if problem["substitutions"]:
                         st.write(f"Variable Substitutions: {problem['substitutions']}")
-                    
+
                     with st.expander("Show Solution"):
                         st.latex(problem["solution_latex"])
                     st.write("---")
-        
+
         # Tab 2: User Preferences
         with tabs[1]:
             st.subheader("User Preferences")
-            
+
             # Load current preferences
             current_prefs = st.session_state.preferences or {}
-            
+
             # Default topic preference
             topics = get_topics_from_db()
             default_topic = current_prefs.get("default_topic", "Basics of Differentiation")
             topic_index = topics.index(default_topic) if default_topic in topics else 0
             new_default_topic = st.selectbox("Default Problem Type", topics, index=topic_index)
-            
+
             # Default difficulty preference
             difficulty_options = ["easy", "medium", "hard", "ultimate"]
             default_difficulty = current_prefs.get("default_difficulty", "easy")
             difficulty_index = difficulty_options.index(default_difficulty) if default_difficulty in difficulty_options else 0
             new_default_difficulty = st.selectbox("Default Difficulty", difficulty_options, index=difficulty_index)
-            
+
             # Default number of questions
             default_num = current_prefs.get("default_num_questions", 5)
             new_default_num = st.slider("Default Number of Problems", 1, 20, default_num)
-            
+
+            # Theme Selection
+            theme_options = ["light", "dark", "blue"] # add more themes
+            current_theme = current_prefs.get("theme", "light")
+            new_theme = st.selectbox("Theme", theme_options, index=theme_options.index(current_theme))
+
             # Save preferences button
             if st.button("Save Preferences"):
                 # Update preferences
                 if not st.session_state.preferences:
                     st.session_state.preferences = {}
-                
+
                 st.session_state.preferences["default_topic"] = new_default_topic
                 st.session_state.preferences["default_difficulty"] = new_default_difficulty
                 st.session_state.preferences["default_num_questions"] = new_default_num
-                
+                st.session_state.preferences["theme"] = new_theme # Save the theme
+
                 # Save to database
                 save_user_preferences(st.session_state.username, st.session_state.preferences)
                 st.success("Preferences saved successfully!")
+                #  Force a rerun to update the theme immediately.
+                st.rerun() # or st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
