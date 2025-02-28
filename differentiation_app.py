@@ -306,30 +306,53 @@ def generate_problem_set(topic: str, difficulty: str, num_questions: int) -> lis
 
 
 def main():
-    st.title("Differentiation Practice")
+    st.set_page_config(page_title="Advanced Math Problem Generator", layout="wide")
 
-    # Sidebar controls
-    st.sidebar.header("Problem Settings")
-    topics = get_topics_from_db()
-    topic = st.sidebar.selectbox("Problem Type", topics) # Use topics from DB
-    difficulty = st.sidebar.selectbox("Difficulty", ["easy", "medium", "hard", "ultimate"])
-    num_questions = st.sidebar.slider("Number of Questions", 1, 10, 3)
+    # Custom CSS for layout (optional, but makes it cleaner)
+    st.markdown(
+        """
+        <style>
+        .reportview-container {
+            padding: 0;
+        }
+        .main .block-container {
+            padding: 2rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    # Generate problems when button is clicked
-    if st.sidebar.button("Generate Problems"):
-        problem_set = generate_problem_set(topic, difficulty, num_questions)
 
-        # Display problems
-        for i, problem in enumerate(problem_set):
-            st.subheader(f"Question {i+1}")
-            st.latex(problem["problem_latex"])
-            if problem["substitutions"]:
-                st.write(f"Variable Substitutions: {problem['substitutions']}")
-            st.write("---")  # Separator
+    st.title("Advanced Math Problem Generator") # Changed title to match the image
+    st.markdown("<hr>", unsafe_allow_html=True)  # Horizontal line
 
-            # Solution dropdown
-            with st.expander("Show Solution"):
-                st.latex(problem["solution_latex"])
+    # Problem Generation Section
+    with st.container():
+        col1, col2, col3 = st.columns(3)  # Create three columns for layout
+
+        with col1:
+            topics = get_topics_from_db()
+            topic = st.selectbox("Problem Type", topics, index=0) # Use topics from DB
+        with col2:
+            difficulty = st.selectbox("Difficulty", ["easy", "medium", "hard", "ultimate"], index=0)
+        with col3:
+            num_questions = st.slider("Number of Problems", 1, 20, 5)  # Slider for number of questions
+
+        if st.button("Generate Problems"):  # Generate button
+            problem_set = generate_problem_set(topic, difficulty, num_questions)
+
+            # Display Problems Section
+            for i, problem in enumerate(problem_set):
+                st.subheader(f"Question {i+1}")
+                st.latex(problem["problem_latex"])
+                if problem["substitutions"]:
+                    st.write(f"Variable Substitutions: {problem['substitutions']}")
+
+                with st.expander("Show Solution"):
+                    st.latex(problem["solution_latex"])
+                st.write("---")  # Separator
+
 
 if __name__ == "__main__":
     main()
